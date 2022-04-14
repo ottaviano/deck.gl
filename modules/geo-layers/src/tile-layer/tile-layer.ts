@@ -303,7 +303,7 @@ export default class TileLayer<DataT = any, ExtraPropsT = {}> extends CompositeL
       _offset: number;
       tile: Tile2DHeader;
     }
-  ): LayersList {
+  ): Layer | null | LayersList {
     return this.props.renderSubLayers(props);
   }
 
