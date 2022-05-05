@@ -120,3 +120,4 @@ export type {
   Position,
   Color
 } from './types/layer-props';
+export type {ConstructorOf} from './types/types';
