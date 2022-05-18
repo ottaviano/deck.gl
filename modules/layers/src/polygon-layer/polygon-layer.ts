@@ -23,6 +23,7 @@ import {
   AccessorFunction,
   Color,
   CompositeLayer,
+  CompositeLayerProps,
   createIterable,
   Layer,
   LayersList,
@@ -43,10 +44,11 @@ export type MaterialProps = {
   specularColor: [r: number, g: number, b: number];
 };
 
-/**
- * Properties for `PolygonLayer`.
- */
-export type PolygonLayerProps<DataT = any> = {
+/** All properties supported by `PolygonLayer`. */
+export type PolygonLayerProps<DataT = any> = _PolygonLayerProps<DataT> & CompositeLayerProps<DataT>;
+
+/** Properties added by `PolygonLayer`. */
+export type _PolygonLayerProps<DataT = any> = {
   /**
    * Whether to draw an outline around the polygon (solid fill).
    *
@@ -246,7 +248,7 @@ const defaultProps = {
 };
 
 export default class PolygonLayer<DataT = any, ExtraProps = {}> extends CompositeLayer<
-  Required<PolygonLayerProps<DataT>> & ExtraProps
+  Required<_PolygonLayerProps<DataT>> & ExtraProps
 > {
   static layerName = 'PolygonLayer';
   static defaultProps = defaultProps;
