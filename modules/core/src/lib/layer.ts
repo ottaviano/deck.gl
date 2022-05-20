@@ -23,6 +23,7 @@ import {COORDINATE_SYSTEM, OPERATION} from './constants';
 import AttributeManager from './attribute/attribute-manager';
 import UniformTransitionManager from './uniform-transition-manager';
 import {diffProps, validateProps} from '../lifecycle/props';
+import {LIFECYCLE, Lifecycle} from '../lifecycle/constants';
 import {count} from '../utils/count';
 import log from '../utils/log';
 import debug from '../debug';
@@ -163,6 +164,18 @@ export type UpdateParameters<LayerT extends Layer> = {
 export default abstract class Layer<PropsT = any> extends Component<PropsT> {
   static defaultProps: any = defaultProps;
   static layerName: string = 'Layer';
+
+  lifecycle: Lifecycle = LIFECYCLE.NO_STATE; // Helps track and debug the life cycle of the layers
+  context: LayerContext | null = null; // Will reference layer manager's context, contains state shared by layers
+  state: Record<string, any> | null = null; // Will be set to the shared layer state object during layer matching
+  internalState: LayerState<PropsT> | null = null;
+
+  constructor(...propObjects: Partial<PropsT>[]) {
+    super(propObjects);
+
+    // Seal the layer
+    Object.seal(this);
+  }
 
   toString(): string {
     const className = (this.constructor as typeof Layer).layerName || this.constructor.name;

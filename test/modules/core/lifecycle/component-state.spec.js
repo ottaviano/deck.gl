@@ -12,7 +12,11 @@ const defaultProps = {
   image: {type: 'image', value: null, async: true}
 };
 
-class TestComponent extends Component {}
+class TestComponent extends Component {
+  constructor(...props) {
+    super(props);
+  }
+}
 
 TestComponent.componentName = 'TestComponent';
 TestComponent.defaultProps = defaultProps;

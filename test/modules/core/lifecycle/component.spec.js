@@ -14,7 +14,7 @@ const defaultProps = {
 
 class TestComponent extends Component {
   constructor(...props) {
-    super(...props);
+    super(props);
   }
 }
 
